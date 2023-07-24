@@ -1,26 +1,34 @@
 # create-app
-This script is to create an application in Ant Media Server. Using this script you can create applications in your Ant Media with a defined database such as MongoDB, MongoDB serverless, or Redis.
+This script is to create an application in Ant Media Server. Using this script you can create applications in your Ant Media with a defined database such as MongoDB, and Redis.
 
-## For Ant Media Server running in standalone mode
-### MongoDB:
-./create_application.sh -n live -h mongodb://localhost:27017 -u username -p password
+### MapDB:
+`sudo ./create_app.sh -n myapp`
 
-### MongoDB Atlas:
-./create_application.sh -n live -h mongodb+srv://<username>:<password>@cluster-url -u username -p password
+### Standalone Mode Using Redis as the Database:
+- Without Username and Password:
+`sudo ./create_app.sh -n myapp -h redis://localhost:6379`
+- With Username and Password:
+`sudo ./create_app.sh -n myapp -h redis://username:password@localhost:6379`
 
-### Redis:
-./create_application.sh -n live -h redis://localhost:6379
+### Cluster Mode Using Redis as the Database:
+- Without Username and Password:
+`sudo ./create_app.sh -n myapp -c true -h redis://localhost:6379`
+- With Username and Password:
+`sudo ./create_app.sh -n myapp -c true -h redis://username:password@localhost:6379`
 
-## For Ant Media Server running in cluster mode
-### MongoDB:
-./create_application.sh -n live -c -h mongodb://mongodb-cluster-ip:27017 -u username -p password
+### Standalone Mode Using MongoDB as the Database:
+- Without Username and Password:
+`sudo ./create_app.sh -n myapp -h mongodb://localhost:27017`
+- With Username and Password:
+`sudo ./create_app.sh -n myapp -h mongodb://username:password@localhost:27017`
 
-### MongoDB Atlas:
-./create_application.sh -n live -c -h mongodb+srv://<username>:<password>@cluster-url -u username -p password
+### Cluster Mode Using MongoDB as the Database:
+- Without Username and Password:
+`sudo ./create_app.sh -n myapp -c true -h mongodb://mongodb-cluster-ip:27017`
+- With Username and Password:
+`sudo ./create_app.sh -n myapp -c true -h mongodb://username:password@mongodb-cluster-ip:27017`
 
-### Redis:
-./create_application.sh -n live -c -h redis://redis-host:6379
 
-Please replace the placeholders <username>, <password>, mongodb-cluster-ip, and cluster-url with the actual values specific to your setup.
+Please replace the placeholders myapp, localhost, username, password, and mongodb-cluster-ip, etc. with the actual values specific to your setup.
 
 By including the -c flag, you enable cluster mode for the application deployment. Omitting the -c flag will default to standalone mode.
